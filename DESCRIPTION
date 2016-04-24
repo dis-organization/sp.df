@@ -1,0 +1,17 @@
+Package: sp.df
+Title: Geometry Columns in a Object-First Table
+Version: 0.0.0.9000
+Authors@R: person("Michael D.","Sumner", role = c("aut", "cre"), email = "mdsumner@gmail.com")
+Description: Illustrate the use of a geometry column to replace Spatial.
+Depends:
+    R (>= 3.2.5),
+    dplyr,
+    sp
+Imports:
+    methods
+Suggests: maptools
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 5.0.1
+Suggests: testthat

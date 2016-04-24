@@ -1,0 +1,38 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+# sp_df
+
+In `sp_df` we can store the `Spatial*` (without the DataFrame) geometry in a special column. 
+
+```{r}
+geocol <- sp_df(wrld_simpl)
+geocol %>% dplyr::select(NAME, Spatial_)
+```
+
+Note that this approach can be easily applied with WKT or WKB, it's just a fair bit of extra work to do the type conversion when needed. Note that, R has a `raw` type that seamlessly handles WKB from many DBs, and the `wkb` package can read it, likewise with `rgeos::readWKT` and `rgeos::writeWKT`. (See this in action in [manifoldr](https://github.com/mdsumner/manifoldr).)
+
+## Questions on sp_df
+
+
+Can we use mutate with the as coercion? 
+
+```{r}
+spdf <- sp_df(wrld_simpl)
+## this doesn't work
+#spdf %>% mutate(Spatial_ = as(Spatial_, "SpatialLines"))
+spdf$Spatial_ <- as(spdf$Spatial_, "SpatialLines")
+```
+
+How to apply this, as an extra class? Note that geom_polygon in gggeom does not survive filter since the class attribute is lost. 
